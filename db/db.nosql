@@ -1,0 +1,93 @@
+db.createCollection('type_user');
+db.type_user.insert(
+    {
+        name:"client",
+        description:"acheteur potentiel"
+    },
+    {
+        name:"restaurant",
+        description:"restaurateur qui travail avec E-kaly"
+    },
+    {
+        name:"liveur",
+        description:"livreur de la marchandise",
+    }
+);
+
+db.createCollection('restaurant');
+db.restaurant.insert(
+    {
+        name:"BOZAKA",
+        description:"tout type de salade exotique "
+    }
+);
+
+db.createCollection('user');
+db.user.insert(
+    {
+        name:"Jean de la Croix",
+        email:"client@gmail.com",
+        password:"1234",
+        type_user_id:"",
+        type_user_name:"client",
+        contact:"0326358945"
+    },
+    {
+        name:"Jean Claude",
+        email:"resto@gmail.com",
+        password:"1234",
+        type_user_id:"",
+        type_user_name:"restaurant",
+        contact:"0383256984",
+        restaurant_id:"",
+        restaurant_name:"BOZAKA"
+    },
+    {
+        name:"Jean Yves",
+        email:"liveur@gmail.com",
+        password:"1234",
+        type_user_id:"",
+        type_user_name:"liveaur",
+        contact:"0383256984"
+    }
+);
+
+db.createCollection('plat');
+db.plat.insert(
+    {
+        name:"Salady voataby",
+        restaurant_id:"",
+        restaurant_name:"BOZAKA",
+        prix:"2000"
+    }
+);
+
+db.createCollection('commande');
+db.commande.insert(
+    {
+        restaurant_id:"",
+        restaurant_name:"BOZAKA",
+        prix_global: "2000",
+        client_id: "",
+        client_name:"Jean de la croix",
+        client_contact:"0326358945",
+        date_comande:"",
+        lieu_adresse_livraison: "isoraka",
+        etat: 0  # 0:etat a livrer  1:etat livrer
+    }
+);
+
+db.createCollection('detail_commande);
+db.detail_commande.insert(
+    {
+        commande_id:"",
+        plat_id:"",
+        plat_name:""Salady voataby",
+        restaurant_id:"",
+        restaurant_name:"BOZAKA",
+        plat_prix: "2000",
+        client_id: "",
+        client_name:"Jean de la croix",
+        client_contact:"0326358945"
+    }
+);
