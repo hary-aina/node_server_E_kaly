@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 // [!] : Pour le local de l'application en http
-const http = require('http').Server(app);
+//const http = require('http').Server(app);
 
 // [!] : Pour la production de l'application en https
 // const fs = require('fs');
@@ -126,10 +126,15 @@ app.use((req, res, next) => {
 const port = process.env.PORT || config.PORT;
 const addr = process.env.SERVER_ADDR || 'localhost';
 
-//[!] : demarrage du serveur en http
-http.listen(port, function(){
+//[!] : demarrage du serveur simple
+app.listen(port, function(){
 	console.log(`Listening on ${ addr }:${ port }`);
 });
+
+//[!] : demarrage du serveur en http
+// http.listen(port, function(){
+// 	console.log(`Listening on ${ addr }:${ port }`);
+// });
 
 //[!] : demarrage du serveur en https
 // https.listen(port, function(){
