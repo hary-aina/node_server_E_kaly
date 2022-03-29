@@ -1,6 +1,5 @@
 const { MongoClient } = require("mongodb");
-const connectionString = process.env.DB_URL;
-
+const connectionString = "mongodb+srv://aina:aina@ekaly.wxuqe.mongodb.net/ekaly?retryWrites=true&w=majority";
 function Connection(){
     this.connexion;
     this.client = new MongoClient(connectionString, {
