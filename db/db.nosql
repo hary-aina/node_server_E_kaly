@@ -1,5 +1,5 @@
 db.createCollection('type_user');
-db.type_user.insert(
+db.type_user.insertMany(
     {
         name:"client",
         description:"acheteur potentiel"
@@ -15,7 +15,7 @@ db.type_user.insert(
 );
 
 db.createCollection('restaurant');
-db.restaurant.insert(
+db.restaurant.insertOne(
     {
         name:"BOZAKA",
         description:"tout type de salade exotique "
@@ -23,12 +23,12 @@ db.restaurant.insert(
 );
 
 db.createCollection('user');
-db.user.insert(
+db.user.insertMany([    
     {
         name:"Jean de la Croix",
         email:"client@gmail.com",
         password:"1234",
-        type_user_id:"",
+        type_user_id:ObjectId("6242ace5e73c895c2cfd915a"),
         type_user_name:"client",
         contact:"0326358945"
     },
@@ -36,27 +36,27 @@ db.user.insert(
         name:"Jean Claude",
         email:"resto@gmail.com",
         password:"1234",
-        type_user_id:"",
+        type_user_id:ObjectId("6242ae04e73c895c2cfd915b"),
         type_user_name:"restaurant",
         contact:"0383256984",
-        restaurant_id:"",
+        restaurant_id:ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA"
     },
     {
         name:"Jean Yves",
         email:"liveur@gmail.com",
         password:"1234",
-        type_user_id:"",
+        type_user_id:ObjectId("6242ae04e73c895c2cfd915c"),
         type_user_name:"liveaur",
         contact:"0383256984"
     }
-);
+]);
 
 db.createCollection('plat');
 db.plat.insert(
     {
         name:"Salady voataby",
-        restaurant_id:"",
+        restaurant_id:ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA",
         prix:"2000"
     }
@@ -65,28 +65,30 @@ db.plat.insert(
 db.createCollection('commande');
 db.commande.insert(
     {
-        restaurant_id:"",
+        restaurant_id: ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA",
         prix_global: "2000",
-        client_id: "",
+        client_id: ObjectId("6242b04ce73c895c2cfd915e"),
         client_name:"Jean de la croix",
         client_contact:"0326358945",
-        date_comande:"",
+        date_comande: "2022-03-01",
         lieu_adresse_livraison: "isoraka",
-        etat: 0  # 0:etat a livrer  1:etat livrer
+        etat: 0 
     }
 );
+
+ # -10:etat annuler  0:etat creer  10:etat valider  20:etat a liver  30:etat liver et payer
 
 db.createCollection('detail_commande);
 db.detail_commande.insert(
     {
-        commande_id:"",
-        plat_id:"",
-        plat_name:""Salady voataby",
-        restaurant_id:"",
+        commande_id:ObjectId("6242b341e73c895c2cfd9162"),
+        plat_id: ObjectId("6242b302e73c895c2cfd9161"),
+        plat_name:"Salady voataby",
+        restaurant_id: ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA",
         plat_prix: "2000",
-        client_id: "",
+        client_id:ObjectId("6242b04ce73c895c2cfd915e"),
         client_name:"Jean de la croix",
         client_contact:"0326358945"
     }

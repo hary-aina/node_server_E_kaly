@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-var QuotesModel = require('../modele/QuotesModel');
+var AuthModel = require('../modele/AuthModel');
 var Connection = require('../db/Connection');
 
 router.get('/', (req, get) => {
@@ -11,11 +11,11 @@ router.get('/', (req, get) => {
 	});
 });
 
-router.get('/all', (req, res) =>{
+router.get('/login', (req, res) =>{
     let connection = new Connection();
-	let dbpromise = connection.getDB("star-wars-quotes");
+	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = QuotesModel.get(db);
+        const promise = AuthModel.get(db, req);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {

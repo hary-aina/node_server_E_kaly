@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 require('./dotenv')
 
 // [!] : definition des routes
-app.use('/quotes', require("./controller/QuotesController"));
+app.use('/auth', require("./controller/AuthController"));
 
 // [!] : middleware qui capture tous les erreurs 404
 app.use((req, res, next) => {
