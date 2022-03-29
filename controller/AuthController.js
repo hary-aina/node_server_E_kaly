@@ -11,11 +11,11 @@ router.get('/', (req, get) => {
 	});
 });
 
-router.get('/login', (req, res) =>{
+router.post('/login', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = AuthModel.get(db, req);
+        const promise = AuthModel.loginForAnyOne(db, req);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
