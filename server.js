@@ -128,7 +128,7 @@ const addr = process.env.SERVER_ADDR || 'localhost';
 
 //[!] : demarrage du serveur simple
 app.listen(8080, function(){
-	console.log(`Listening on ${ addr }:${ port }`);
+	console.log(`Listening on ${ addr }:${ 8080 }`);
 });
 
 //[!] : demarrage du serveur en http
