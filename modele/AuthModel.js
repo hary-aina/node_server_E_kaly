@@ -4,12 +4,12 @@ var EmailModel = require('../tools/Email');
 module.exports = class AuthModel{
 
     //User connection
-    static loginForAnyOne(db, req){
+    static loginForAnyOne(db, email, password){
         return new Promise((resolve, reject)=> {
             db.collection("user").find(
                 {
-                    email: req.body.email,
-                    password: req.body.password
+                    email : email,
+                    password : password
                 }
             ).toArray(function (err, result) {
                 if (err) {
@@ -27,10 +27,10 @@ module.exports = class AuthModel{
     }
 
     //generate code and send to mail
-    static generateCodeInscription(req){
+    static generateCodeInscription(email, name){
         return new Promise((resolve, reject)=> {
-            let code = EmailModel.genererCode(req.body.email, req.body.name);
-            let promise = EmailModel.sendCode(req.body.email, "Veuillez utiliser ce code pour continuer l'inscription", code);
+            let code = EmailModel.genererCode(email, name);
+            let promise = EmailModel.sendCode(email, "Veuillez utiliser ce code pour continuer l'inscription", code);
             promise.then(value =>{
                 resolve(value);
             }).catch(error =>{
@@ -41,17 +41,17 @@ module.exports = class AuthModel{
     }
 
     //inscription
-    static inscription(db, req){
+    static inscription(db, name, email, password, type_user_id, type_user_name, contact, code){
         return new Promise((resolve, reject)=> {
-            if(EmailModel.verifierCode(req.body.email, req.body.name, req.body.code)){
+            if(EmailModel.verifierCode(email, name, code)){
                 db.collection("user").insertOne(
                     {
-                        name : req.body.name,
-                        email : req.body.email,
-                        password : req.body.password,
-                        type_user_id : ObjectId(req.body.type_user_id),
-                        type_user_name : req.body.type_user_name,
-                        contact : req.body.contact
+                        name : name,
+                        email : email,
+                        password : password,
+                        type_user_id : ObjectId(type_user_id),
+                        type_user_name : type_user_name,
+                        contact : contact
                     }
                 ).toArray(function (err, result) {
                     if (err) {

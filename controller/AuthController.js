@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 var AuthModel = require('../modele/AuthModel');
+var TokenManager = require('../tools/TokenManager');
 var Connection = require('../db/Connection');
 
 router.get('/', (req, get) => {
@@ -15,8 +16,10 @@ router.post('/login', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = AuthModel.loginForAnyOne(db, req);
+        const promise = AuthModel.loginForAnyOne(db, req.body.email, req.body.password);
         promise.then(function(value){
+            // on genere le token
+		    value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
             res.json(value);
         }).catch( error => {
             console.error(error);
@@ -33,7 +36,7 @@ router.post('/login', (req, res) =>{
 });
 
 router.post('/generateInscriptionCode', (req, res) =>{
-    const promise = AuthModel.generateCodeInscription(req);
+    const promise = AuthModel.generateCodeInscription(req.body.email, req.body.name);
     promise.then(function(value){
         if(value){
             res.json({
@@ -63,7 +66,7 @@ router.post('/inscription', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = AuthModel.inscription(db, req);
+        const promise = AuthModel.inscription(db, req.body.name, req.body.email, req.body.password, req.body.type_user_id, req.body.type_user_name, req.body.contact, req.body.code);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
