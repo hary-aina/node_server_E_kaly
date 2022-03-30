@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Socket Perso</title>
+</head>
+<body>
+	<div>
+		<div>
+			Nom socket <input type="text" id="nom_socket" value="test">
+			<br/>
+			DATA : <br/>
+			<textarea id="json_data" cols="50" rows="5"></textarea>
+		</div>
+		<br/>
+		<input type="button" value="Envoyer" onclick="send()">
+		<br/>
+			RECU : <br/>
+		Output :<br/>
+		<textarea id="output" cols="50" rows="5"></textarea>
+		<br/>
+		Broadcast test (if exist) :<br/>
+		<textarea id="output_broadcast" cols="50" rows="5"></textarea>
+	</div>
+
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		let address = prompt("ADRESSE", "http://localhost:3001");
+		let socket = io.connect(address);
+
+		socket.on('recu', data => {
+			document.getElementById("output").value = JSON.stringify(data);
+		});
+
+		socket.on('forEveryoneExceptMe', data => {
+			document.getElementById("output_broadcast").value = JSON.stringify(data);
+		});
+
+		function send() {
+			let sock_name = document.getElementById('nom_socket').value;
+			let content = document.getElementById('json_data').value;
+			content = content.replace(/[ \n\t]+/gi, '');
+			
+			
+			if ( content == '' ) {
+				socket.emit(sock_name, {
+					data : 'Etre ou ne pas etre. Telle est la question'
+				});	
+			} else {
+				try {
+					const data = JSON.parse(content);
+					socket.emit(sock_name, {
+						data : data
+					});
+				} catch(e) {
+					alert('Erreur ' + e);
+				}
+			}
+		}
+	</script>	
+</body>
+</html>
