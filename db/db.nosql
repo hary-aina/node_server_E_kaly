@@ -11,6 +11,10 @@ db.type_user.insertMany(
     {
         name:"liveur",
         description:"livreur de la marchandise",
+    },
+      {
+        name:"responsable ekaly",
+        description:"livreur de la marchandise",
     }
 );
 
@@ -47,7 +51,15 @@ db.user.insertMany([
         email:"liveur@gmail.com",
         password:"1234",
         type_user_id:ObjectId("6242ae04e73c895c2cfd915c"),
-        type_user_name:"liveaur",
+        type_user_name:"liveur",
+        contact:"0383256984"
+    },
+    {
+        name:"Jean Bas",
+        email:"responsable@gmail.com",
+        password:"1234",
+        type_user_id:ObjectId(""),
+        type_user_name:"liveur",
         contact:"0383256984"
     }
 ]);
@@ -58,9 +70,12 @@ db.plat.insert(
         name:"Salady voataby",
         restaurant_id:ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA",
-        prix:"2000"
+        prix:"2000",
+        etat: 10
     }
 );
+
+# -10:etat non visible  10:etat visible 
 
 db.createCollection('commande');
 db.commande.insert(
@@ -73,23 +88,18 @@ db.commande.insert(
         client_contact:"0326358945",
         date_comande: "2022-03-01",
         lieu_adresse_livraison: "isoraka",
+        livreur_id: ObjectId(""),
+        livreur_name: "Jean Yves",
+        detail_commande : [
+            {
+                plat_id: ObjectId("6242b302e73c895c2cfd9161"),
+                plat_name:"Salady voataby",
+                plat_prix: "2000",
+            }
+        ],
         etat: 0 
     }
 );
 
- # -10:etat annuler  0:etat creer  10:etat valider  20:etat a liver  30:etat liver et payer
+ # -10:etat annuler  0:etat creer  10:etat valider  20:etat a liver  25:livraison en cours  30:etat liver et payer
 
-db.createCollection('detail_commande);
-db.detail_commande.insert(
-    {
-        commande_id:ObjectId("6242b341e73c895c2cfd9162"),
-        plat_id: ObjectId("6242b302e73c895c2cfd9161"),
-        plat_name:"Salady voataby",
-        restaurant_id: ObjectId("6242af76e73c895c2cfd915d"),
-        restaurant_name:"BOZAKA",
-        plat_prix: "2000",
-        client_id:ObjectId("6242b04ce73c895c2cfd915e"),
-        client_name:"Jean de la croix",
-        client_contact:"0326358945"
-    }
-);
