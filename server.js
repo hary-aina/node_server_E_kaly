@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const config = require("./tools/project.config");
-//import DB_URL from "./tools/project.config.json"
 
 // [!] : Pour le local de l'application en http
 //const http = require('http').Server(app);
@@ -25,6 +24,10 @@ require('./dotenv')
 
 // [!] : definition des routes
 app.use('/auth', require("./controller/AuthController"));
+app.use('/client/commande', require("./controller/client/CommandeController"));
+app.use('/livreur/commande', require("./controller/livreur/CommandeController"));
+app.use('/responsable_E_kaly/commande', require("./controller/responsable_E_kaly/CommandeController"));
+app.use('/restaurant/commande', require("./controller/restaurant/CommandeController"));
 
 // [!] : middleware qui capture tous les erreurs 404
 app.use((req, res, next) => {
@@ -39,77 +42,6 @@ app.use((req, res, next) => {
 		next();
 	}
 });
-
-
-// MongoClient.connect(connectionString, { useUnifiedTopology: true },
-//   )
-//   .then(client => {
-//     console.log('Connected to Database')
-//     const db = client.db('star-wars-quotes')
-//     const quotesCollection = db.collection('quotes')
-
-//     // ========================
-//     // Middlewares
-//     // ========================
-//     app.set('view engine', 'ejs')
-//     app.use(bodyParser.urlencoded({ extended: true }))
-//     app.use(bodyParser.json())
-//     app.use(express.static('public'))
-
-//     // ========================
-//     // Routes
-//     // ========================
-//     app.get('/', (req, res) => {
-//       db.collection('quotes').find().toArray()
-//         .then(quotes => {
-//           res.render('index.ejs', { quotes: quotes })
-//         })
-//         .catch( error => {
-//           res.sendFile('D:/WEB AVANCE/crud-demo-master/index.html');
-//         });
-//     })
-
-//     app.post('/quotes', (req, res) => {
-//       quotesCollection.insertOne(req.body)
-//         .then(result => {
-//           res.redirect('/')
-//         })
-//         .catch(error => console.error(error))
-//     })
-
-//     app.put('/quotes', (req, res) => {
-//       quotesCollection.findOneAndUpdate(
-//         { name: 'Yoda' },
-//         {
-//           $set: {
-//             name: req.body.name,
-//             quote: req.body.quote
-//           }
-//         },
-//         {
-//           upsert: true
-//         }
-//       )
-//         .then(result => res.json('Success'))
-//         .catch(error => console.error(error))
-//     })
-
-//     app.delete('/quotes', (req, res) => {
-//       quotesCollection.deleteOne(
-//         { name: req.body.name }
-//       )
-//         .then(result => {
-//           if (result.deletedCount === 0) {
-//             return res.json('No quote to delete')
-//           }
-//           res.json('Deleted Darth Vadar\'s quote')
-//         })
-//         .catch(error => console.error(error))
-//     })
-
-//   })
-//   .catch(console.error);
-
 
 // [!] : demarrage du serveur
 const port = process.env.PORT || config.PORT;

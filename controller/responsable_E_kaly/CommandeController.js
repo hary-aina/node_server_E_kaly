@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-var CommandeModel = require('../modele/CommandeModel');
-var Connection = require('../db/Connection');
+var CommandeModel = require('../../modele/CommandeModel');
+var Connection = require('../../db/Connection');
 
 router.get('/', (req, get) => {
 	res.json({
