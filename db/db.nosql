@@ -101,5 +101,5 @@ db.commande.insert(
     }
 );
 
- # -10:etat annuler  0:etat creer  10:etat valider  20:etat a liver  25:livraison en cours  30:etat liver et payer
+ # -10:etat annuler  0:etat creer  10:etat valider  20:etat a liver  25:livraison en cours  30:etat liver 
 
