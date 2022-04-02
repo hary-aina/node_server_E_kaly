@@ -3,7 +3,7 @@ const app = express();
 const config = require("./tools/project.config");
 
 // [!] : Pour le local de l'application en http
-//const http = require('http').Server(app);
+const http = require('http').Server(app);
 
 let bodyParser = require('body-parser');
 
@@ -48,11 +48,11 @@ const port = process.env.PORT || config.PORT;
 const addr = process.env.SERVER_ADDR || 'localhost';
 
 //[!] : demarrage du serveur simple
-app.listen(port, function(){
-	console.log(`Listening on ${ addr }:${ port }`);
-});
-
-//[!] : demarrage du serveur en http
-// http.listen(port, function(){
+// app.listen(port, function(){
 // 	console.log(`Listening on ${ addr }:${ port }`);
 // });
+
+//[!] : demarrage du serveur en http
+http.listen(port, function(){
+	console.log(`Listening on ${ addr }:${ port }`);
+});
