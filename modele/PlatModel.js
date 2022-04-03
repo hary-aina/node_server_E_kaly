@@ -2,6 +2,7 @@ module.exports = class PlatModel{
 
     static getPlat(db, limit, page_num){
         let skips = limit * (page_num - 1);
+        limit = parseInt(limit);
         return new Promise((resolve, reject)=> {
             db.collection("plat").find(
                 {

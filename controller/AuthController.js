@@ -18,9 +18,19 @@ router.post('/login', (req, res) =>{
     dbpromise.then(function(db){
         const promise = AuthModel.loginForAnyOne(db, req.body.email, req.body.password);
         promise.then(function(value){
-            // on genere le token
-		    value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
-            res.json(value);
+            //console.log(value);
+            if(value.data.length != 0){
+                // on genere le token
+                value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
+                res.json(value);
+            }
+            else{
+                res.json({
+                    status : 400, // reponse http
+                    error : true, // pour signaler que ceci est une erreur
+                    data : "login inexistant" // pour les users
+                });
+            }
         }).catch( error => {
             console.error(error);
             res.json({
