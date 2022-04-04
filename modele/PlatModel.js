@@ -1,3 +1,5 @@
+const ObjectId = require('mongodb').ObjectId; 
+
 module.exports = class PlatModel{
 
     static getPlat(db, limit, page_num){
@@ -25,11 +27,12 @@ module.exports = class PlatModel{
     }
 
     static getPlatByRestaurant(db, resto_id, limit, page_num){
+        limit = parseInt(limit);
         let skips = limit * (page_num - 1);
         return new Promise((resolve, reject)=> {
             db.collection("plat").find(
                 {
-                    restaurant_id : ObjectId(resto_id),
+                    restaurant_id : resto_id,
                     etat : 10
                 }
             )
@@ -51,7 +54,7 @@ module.exports = class PlatModel{
     static manageVisibilityOfPlatByRestaurant(db, resto_id, plat_id, etat){
         return new Promise((resolve, reject)=> {
             db.collection("plat").findOneAndUpdate(
-                { restaurant_id: resto_id, _id: plat_id },
+                { restaurant_id: resto_id, _id: new ObjectId(plat_id) },
                 {
                     $set: {
                         etat: etat

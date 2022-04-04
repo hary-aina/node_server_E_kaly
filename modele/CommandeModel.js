@@ -1,3 +1,5 @@
+const ObjectId = require('mongodb').ObjectId; 
+
 module.exports = class CommadeModel{
 
     //pour le client
@@ -6,7 +8,7 @@ module.exports = class CommadeModel{
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
                 {
-                    client_id : ObjectId(client_id)
+                    client_id : client_id
                 }
             )
             .skip(skips).limit(limit).toArray(function (err, result) {
@@ -30,7 +32,7 @@ module.exports = class CommadeModel{
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
                 {
-                    restaurant_id : ObjectId(resto_id),
+                    restaurant_id : resto_id,
                     etat : {$gte : 10}
                 }
             )
@@ -55,7 +57,7 @@ module.exports = class CommadeModel{
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
                 {
-                    livreur_id : ObjectId(livreur_id),
+                    livreur_id : livreur_id,
                     etat : 20
                 }
             )
@@ -77,7 +79,7 @@ module.exports = class CommadeModel{
     static setStateCommande(db, commande_id, etat){
         return new Promise((resolve, reject)=> {
             db.collection("commande").findOneAndUpdate(
-                { _id: commande_id },
+                { _id: new ObjectId(commande_id) },
                 {
                     $set: {
                         etat: etat
@@ -106,10 +108,10 @@ module.exports = class CommadeModel{
         return new Promise((resolve, reject)=> {
             db.collection("commande").insertOne(
                 {
-                    restaurant_id: ObjectId(restaurant_id),
+                    restaurant_id: restaurant_id,
                     restaurant_name: restaurant_name,
                     prix_global: prix_global,
-                    client_id: ObjectId(client_id),
+                    client_id: client_id,
                     client_name: client_name,
                     client_contact: client_contact,
                     date_comande: date_comande,
@@ -138,10 +140,10 @@ module.exports = class CommadeModel{
     static asignLiveur(db, commande_id, livreur_id, livreur_name){
         return new Promise((resolve, reject)=> {
             db.collection("commande").findOneAndUpdate(
-                { _id: commande_id },
+                { _id: new ObjectId(commande_id) },
                 {
                     $set: {
-                        livreur_id : ObjectId(livreur_id),
+                        livreur_id : livreur_id,
                         livreur_name : livreur_name
                     }
                 },

@@ -26,6 +26,23 @@ db.restaurant.insertOne(
     }
 );
 
+db.createCollection('categorie');
+db.categorie.insertMany([
+    {
+        name:"entrée"
+    },
+    {
+        name:"resitance"
+    },
+    {
+        name:"pizzas"
+    },
+    {
+        name:"tacos"
+    }
+]);
+
+
 db.createCollection('user');
 db.user.insertMany([    
     {
@@ -70,7 +87,10 @@ db.plat.insert(
         name:"Salady voataby",
         restaurant_id:ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA",
+        categorie_id:ObjectId(""),
+        categorie_name:"entrée", 
         prix:"2000",
+        description : "salade de tomate composé d'herbe et divers produit bio" 
         etat: 10
     }
 );
@@ -95,6 +115,7 @@ db.commande.insert(
                 plat_id: ObjectId("6242b302e73c895c2cfd9161"),
                 plat_name:"Salady voataby",
                 plat_prix: "2000",
+                nombre: 2
             }
         ],
         etat: 0 

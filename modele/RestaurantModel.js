@@ -1,5 +1,6 @@
 /* node JS */
 var EmailModel = require('../tools/Email');
+const ObjectId = require('mongodb').ObjectId; 
 
 module.exports = class RestaurantModel{
 
@@ -34,7 +35,7 @@ module.exports = class RestaurantModel{
                         if (err) {
                             db.collection("restaurant").deleteOne(
                                 {
-                                    _id : ObjectId(restaurant_id), 
+                                    _id : new ObjectId(restaurant_id), 
                                 }
                             )
                             console.error(err);
