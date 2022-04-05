@@ -60,7 +60,7 @@ router.put('/valider/:commande_id', (req, res)=>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = CommandeModel. setStateCommande(db, req.params.commande_id, 10);
+        const promise = CommandeModel.setStateCommande(db, req.params.commande_id, 10);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
@@ -77,5 +77,26 @@ router.put('/valider/:commande_id', (req, res)=>{
     });
 });
 
+//valider ma commande
+router.put('/modifier/:commande_id', (req, res)=>{
+    let connection = new Connection();
+	let dbpromise = connection.getDB("ekaly");
+    dbpromise.then(function(db){
+        const promise = CommandeModel.modifierCommande(db, req.params.commande_id, req.body.prix_global, req.body.detail_commande, req.body.lieu_adresse_livraison, req.body.client_contact);
+        promise.then(function(value){
+            res.json(value);
+        }).catch( error => {
+            //console.error(error);
+            res.json({
+                status : 400, // reponse http
+                error : true, // pour signaler que ceci est une erreur
+                detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+                data : "Une erreur est survenue lors de la requête" // pour les users
+            });
+        }).finally(()=>{
+            connection.endConnection();
+        });
+    });
+});
 
 module.exports = router;

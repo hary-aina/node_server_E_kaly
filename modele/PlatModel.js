@@ -63,17 +63,16 @@ module.exports = class PlatModel{
                 {
                     upsert: true
                 }
-            ).toArray(function (err, result) {
-                if (err) {
-                    console.error(err);
-                    reject(error);
-					return;
-                } else {
+            ).then(function (data) {
+                if(data.ok == 1){
                     resolve({
                         "status": 200,
-                        "data": result
+                        "data": data.value
                     });
+                }else{
+                    reject(data);
                 }
+                return;
             });
         });
     }

@@ -89,17 +89,48 @@ module.exports = class CommadeModel{
                 {
                     upsert: true
                 }
-            ).toArray(function (err, result) {
-                if (err) {
-                    console.error(err);
-                    reject(error);
-					return;
-                } else {
+            ).then(function (data) {
+                if(data.ok == 1){
                     resolve({
                         "status": 200,
-                        "data": result
+                        "data": data.value
                     });
+                }else{
+                    reject(data);
                 }
+                return;
+            });
+        });
+    }
+
+    //modifier ma commande
+    static modifierCommande(db, commande_id, prix_global, detail_commande, lieu_adresse_livraison, client_contact){
+        return new Promise((resolve, reject)=> {
+            db.collection("commande").findOneAndUpdate(
+                { _id: new ObjectId(commande_id) },
+                {
+                    $set: {
+                        prix_global : prix_global, 
+                        detail_commande : detail_commande, 
+                        lieu_adresse_livraison : lieu_adresse_livraison, 
+                        client_contact : client_contact
+                    }
+                },
+                {
+                    upsert: true
+                }
+            ).then(function (data) {
+                //reject(err);
+                //console.log(data.ok);
+                if(data.ok == 1){
+                    resolve({
+                        "status": 200,
+                        "data": data.value
+                    });
+                }else{
+                    reject(data);
+                }
+                return;
             });
         });
     }
@@ -122,24 +153,17 @@ module.exports = class CommadeModel{
                     detail_commande : detail_commande,
                     etat : 0
                 }
-            ).then(function (err, result) {
-                if (err) {
-                    //console.error("insertCount : "+err.insertedCount, "ok : "+err.ops);
-                    if(err.insertedCount == 1){
-                        resolve({
-                            "status": 200,
-                            "data": err.ops
-                        });
-                    }else{
-                        reject(err);
-                    }
-					return;
-                } else {
+            ).then(function (data) {
+                //console.error("insertCount : "+data.insertedCount, "ok : "+data.ops);
+                if(data.insertedCount == 1){
                     resolve({
                         "status": 200,
-                        "data": result
+                        "data": data.ops
                     });
+                }else{
+                    reject(data);
                 }
+                return;
             });
         });
     }
@@ -158,17 +182,16 @@ module.exports = class CommadeModel{
                 {
                     upsert: true
                 }
-            ).toArray(function (err, result) {
-                if (err) {
-                    console.error(err);
-                    reject(error);
-					return;
-                } else {
+            ).then(function (data) {
+                if(data.ok == 1){
                     resolve({
                         "status": 200,
-                        "data": result
+                        "data": data.value
                     });
+                }else{
+                    reject(data);
                 }
+                return;
             });
         });
     }
