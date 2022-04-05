@@ -9,7 +9,8 @@ module.exports = class CommadeModel{
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
                 {
-                    client_id : client_id
+                    client_id : client_id,
+                    etat: {$gte: 0, $lt:30},
                 }
             )
             .skip(skips).limit(limit).toArray(function (err, result) {
