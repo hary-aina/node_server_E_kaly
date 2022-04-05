@@ -4,6 +4,7 @@ module.exports = class CommadeModel{
 
     //pour le client
     static getCommandeByClient(db, client_id, limit, page_num){
+        limit = parseInt(limit);
         let skips = limit * (page_num - 1);
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
@@ -121,10 +122,17 @@ module.exports = class CommadeModel{
                     detail_commande : detail_commande,
                     etat : 0
                 }
-            ).toArray(function (err, result) {
+            ).then(function (err, result) {
                 if (err) {
-                    console.error(err);
-                    reject(error);
+                    //console.error("insertCount : "+err.insertedCount, "ok : "+err.ops);
+                    if(err.insertedCount == 1){
+                        resolve({
+                            "status": 200,
+                            "data": err.ops
+                        });
+                    }else{
+                        reject(err);
+                    }
 					return;
                 } else {
                     resolve({
