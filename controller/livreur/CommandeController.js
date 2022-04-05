@@ -38,7 +38,7 @@ router.put('/demarrer_livraison/:commande_id', (req, res)=>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = CommandeModel. setStateCommande(db, req.params.commande_id, 25);
+        const promise = CommandeModel.setStateCommande(db, req.params.commande_id, 25);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
@@ -60,7 +60,7 @@ router.put('/cloturer_livraison/:commande_id', (req, res)=>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = CommandeModel. setStateCommande(db, req.params.commande_id, 30);
+        const promise = CommandeModel.setStateCommande(db, req.params.commande_id, 30);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {

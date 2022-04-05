@@ -16,7 +16,7 @@ router.get('/voirPlat/:resto_id/:limit/:page_num', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = PlatModel.getPlatByRestaurant(db, req.params.resto_id, req.params.limit, req.params.page_num);
+        const promise = PlatModel.getPlatByRestaurantOwner(db, req.params.resto_id, req.params.limit, req.params.page_num);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {

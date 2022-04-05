@@ -30,12 +30,13 @@ module.exports = class CommadeModel{
 
     //pour le restaurateur
     static getCommandeByIdResto(db, resto_id, limit, page_num){
+        limit = parseInt(limit);
         let skips = limit * (page_num - 1);
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
                 {
                     restaurant_id : resto_id,
-                    etat : {$gte : 10}
+                    etat : {$gte: 10, $lt:25}
                 }
             )
             .skip(skips).limit(limit).toArray(function (err, result) {
@@ -55,12 +56,13 @@ module.exports = class CommadeModel{
 
     //pour le livreur
     static getCommandeByIdLivreur(db, livreur_id, limit, page_num){
+        limit = parseInt(limit);
         let skips = limit * (page_num - 1);
         return new Promise((resolve, reject)=> {
             db.collection("commande").find(
                 {
                     livreur_id : livreur_id,
-                    etat : 20
+                    etat : {$gte:20, $lt:30}
                 }
             )
             .skip(skips).limit(limit).toArray(function (err, result) {

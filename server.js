@@ -29,6 +29,7 @@ app.use('/client/plat', require("./controller/client/PlatController"));
 app.use('/livreur/commande', require("./controller/livreur/CommandeController"));
 app.use('/responsable_E_kaly/commande', require("./controller/responsable_E_kaly/CommandeController"));
 app.use('/restaurant/commande', require("./controller/restaurant/CommandeController"));
+app.use('/restaurant/plat', require("./controller/restaurant/PlatController"));
 
 // [!] : middleware qui capture tous les erreurs 404
 app.use((req, res, next) => {

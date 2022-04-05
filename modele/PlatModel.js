@@ -51,6 +51,30 @@ module.exports = class PlatModel{
         });
     }
 
+    static getPlatByRestaurantOwner(db, resto_id, limit, page_num){
+        limit = parseInt(limit);
+        let skips = limit * (page_num - 1);
+        return new Promise((resolve, reject)=> {
+            db.collection("plat").find(
+                {
+                    restaurant_id : resto_id
+                }
+            )
+            .skip(skips).limit(limit).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
     static manageVisibilityOfPlatByRestaurant(db, resto_id, plat_id, etat){
         return new Promise((resolve, reject)=> {
             db.collection("plat").findOneAndUpdate(
