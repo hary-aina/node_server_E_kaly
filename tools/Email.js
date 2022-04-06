@@ -79,15 +79,15 @@ module.exports = class Email {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: '@gmail.com',
-        pass: ''
+        user: 'ekalymailer@gmail.com',
+        pass: 'ekaly1234'
       },
       tls: {
         rejectUnauthorized: false
       }
     });  
     let mailOptions = {
-      from: '@gmail.com',
+      from: 'ekalymailer@gmail.com',
       to: email,
       subject: message,
       text: code

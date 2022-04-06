@@ -133,7 +133,7 @@ module.exports = class AuthModel{
     }
 
     //inscription
-    static inscription(db, name, email, password, type_user_id, type_user_name, contact, code){
+    static inscription(db, name, email, password, contact, code){
         return new Promise((resolve, reject)=> {
             if(EmailModel.verifierCode(email, name, code)){
                 db.collection("user").insertOne(
@@ -141,21 +141,21 @@ module.exports = class AuthModel{
                         name : name,
                         email : email,
                         password : password,
-                        type_user_id : ObjectId(type_user_id),
-                        type_user_name : type_user_name,
+                        type_user_id : "",
+                        type_user_name : "client",
                         contact : contact
                     }
-                ).toArray(function (err, result) {
-                    if (err) {
-                        console.error(err);
-                        reject(error);
-                        return;
-                    } else {
+                ).then(function (data) {
+                    //console.error("insertCount : "+data.insertedCount, "ok : "+data.ops);
+                    if(data.insertedCount == 1){
                         resolve({
                             "status": 200,
-                            "data": result
+                            "data": data.ops
                         });
+                    }else{
+                        reject(data);
                     }
+                    return;
                 });
             }else{
                 resolve({

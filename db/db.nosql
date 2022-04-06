@@ -49,7 +49,7 @@ db.user.insertMany([
         name:"Jean de la Croix",
         email:"client@gmail.com",
         password:"1234",
-        type_user_id:ObjectId("6242ace5e73c895c2cfd915a"),
+        type_user_id:"6242ace5e73c895c2cfd915a",
         type_user_name:"client",
         contact:"0326358945"
     },
@@ -57,17 +57,17 @@ db.user.insertMany([
         name:"Jean Claude",
         email:"resto@gmail.com",
         password:"1234",
-        type_user_id:ObjectId("6242ae04e73c895c2cfd915b"),
+        type_user_id:"6242ae04e73c895c2cfd915b",
         type_user_name:"restaurant",
         contact:"0383256984",
-        restaurant_id:ObjectId("6242af76e73c895c2cfd915d"),
+        restaurant_id:"6242af76e73c895c2cfd915d",
         restaurant_name:"BOZAKA"
     },
     {
         name:"Jean Yves",
         email:"liveur@gmail.com",
         password:"1234",
-        type_user_id:ObjectId("6242ae04e73c895c2cfd915c"),
+        type_user_id:"6242ae04e73c895c2cfd915c",
         type_user_name:"livreur",
         contact:"0383256984"
     },
@@ -75,7 +75,7 @@ db.user.insertMany([
         name:"Jean Bas",
         email:"responsable@gmail.com",
         password:"1234",
-        type_user_id:ObjectId("624c704c23db7c2a19a95e90"),
+        type_user_id:"624c704c23db7c2a19a95e90",
         type_user_name:"responsable",
         contact:"0383256984"
     }

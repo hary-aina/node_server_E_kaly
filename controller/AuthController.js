@@ -177,7 +177,7 @@ router.post('/livreur/login', (req, res) =>{
     });
 });
 
-router.post('/generateInscriptionCode', (req, res) =>{
+router.post('/client/generateInscriptionCode', (req, res) =>{
     const promise = AuthModel.generateCodeInscription(req.body.email, req.body.name);
     promise.then(function(value){
         if(value){
@@ -204,11 +204,11 @@ router.post('/generateInscriptionCode', (req, res) =>{
     });
 });
 
-router.post('/inscription', (req, res) =>{
+router.post('/client/inscription', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = AuthModel.inscription(db, req.body.name, req.body.email, req.body.password, req.body.type_user_id, req.body.type_user_name, req.body.contact, req.body.code);
+        const promise = AuthModel.inscription(db, req.body.name, req.body.email, req.body.password, req.body.contact, req.body.code);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
