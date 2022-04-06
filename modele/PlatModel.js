@@ -1,4 +1,4 @@
-const ObjectId = require('mongodb').ObjectId; 
+const ObjectId = require('mongodb').ObjectId;
 
 module.exports = class PlatModel{
 
@@ -9,6 +9,38 @@ module.exports = class PlatModel{
             db.collection("plat").find(
                 {
                     etat : 10
+                }
+            )
+            .skip(skips).limit(limit).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
+    static searchPlat(db, stringToSearch, limit, page_num){
+        let skips = limit * (page_num - 1);
+        limit = parseInt(limit);
+        return new Promise((resolve, reject)=> {
+            db.collection("plat").find(
+                {
+                    $or : [ 
+                        { name: new RegExp(stringToSearch, 'i') },
+                        { restaurant_name: new RegExp(stringToSearch, 'i') },
+                        { categorie_name: new RegExp(stringToSearch, 'i') },
+                        { description: new RegExp(stringToSearch, 'i') },
+                    ],
+                    $and: [
+                        { etat : 10}
+                    ]
                 }
             )
             .skip(skips).limit(limit).toArray(function (err, result) {
