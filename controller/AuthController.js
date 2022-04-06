@@ -45,6 +45,138 @@ router.post('/login', (req, res) =>{
     });
 });
 
+router.post('/client/login', (req, res) =>{
+    let connection = new Connection();
+	let dbpromise = connection.getDB("ekaly");
+    dbpromise.then(function(db){
+        const promise = AuthModel.loginForClient(db, req.body.email, req.body.password);
+        promise.then(function(value){
+            //console.log(value);
+            if(value.data.length != 0){
+                // on genere le token
+                value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
+                res.json(value);
+            }
+            else{
+                res.json({
+                    status : 400, // reponse http
+                    error : true, // pour signaler que ceci est une erreur
+                    data : "login inexistant" // pour les users
+                });
+            }
+        }).catch( error => {
+            console.error(error);
+            res.json({
+                status : 400, // reponse http
+                error : true, // pour signaler que ceci est une erreur
+                detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+                data : "Une erreur est survenue lors de la requête" // pour les users
+            });
+        }).finally(()=>{
+            connection.endConnection();
+        });
+    });
+});
+
+router.post('/resto/login', (req, res) =>{
+    let connection = new Connection();
+	let dbpromise = connection.getDB("ekaly");
+    dbpromise.then(function(db){
+        const promise = AuthModel.loginForResto(db, req.body.email, req.body.password);
+        promise.then(function(value){
+            //console.log(value);
+            if(value.data.length != 0){
+                // on genere le token
+                value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
+                res.json(value);
+            }
+            else{
+                res.json({
+                    status : 400, // reponse http
+                    error : true, // pour signaler que ceci est une erreur
+                    data : "login inexistant" // pour les users
+                });
+            }
+        }).catch( error => {
+            console.error(error);
+            res.json({
+                status : 400, // reponse http
+                error : true, // pour signaler que ceci est une erreur
+                detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+                data : "Une erreur est survenue lors de la requête" // pour les users
+            });
+        }).finally(()=>{
+            connection.endConnection();
+        });
+    });
+});
+
+router.post('/responsable/login', (req, res) =>{
+    let connection = new Connection();
+	let dbpromise = connection.getDB("ekaly");
+    dbpromise.then(function(db){
+        const promise = AuthModel.loginForResponsable(db, req.body.email, req.body.password);
+        promise.then(function(value){
+            //console.log(value);
+            if(value.data.length != 0){
+                // on genere le token
+                value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
+                res.json(value);
+            }
+            else{
+                res.json({
+                    status : 400, // reponse http
+                    error : true, // pour signaler que ceci est une erreur
+                    data : "login inexistant" // pour les users
+                });
+            }
+        }).catch( error => {
+            console.error(error);
+            res.json({
+                status : 400, // reponse http
+                error : true, // pour signaler que ceci est une erreur
+                detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+                data : "Une erreur est survenue lors de la requête" // pour les users
+            });
+        }).finally(()=>{
+            connection.endConnection();
+        });
+    });
+});
+
+router.post('/livreur/login', (req, res) =>{
+    let connection = new Connection();
+	let dbpromise = connection.getDB("ekaly");
+    dbpromise.then(function(db){
+        const promise = AuthModel.loginForLivreur(db, req.body.email, req.body.password);
+        promise.then(function(value){
+            //console.log(value);
+            if(value.data.length != 0){
+                // on genere le token
+                value.token = TokenManager.generateUsing({ email : req.body.email, password : req.body.password});
+                res.json(value);
+            }
+            else{
+                res.json({
+                    status : 400, // reponse http
+                    error : true, // pour signaler que ceci est une erreur
+                    data : "login inexistant" // pour les users
+                });
+            }
+        }).catch( error => {
+            console.error(error);
+            res.json({
+                status : 400, // reponse http
+                error : true, // pour signaler que ceci est une erreur
+                detailed : `${error} : concernant la requête infos `, // erreur pour les devs
+                data : "Une erreur est survenue lors de la requête" // pour les users
+            });
+        }).finally(()=>{
+            connection.endConnection();
+        });
+    });
+});
+
 router.post('/generateInscriptionCode', (req, res) =>{
     const promise = AuthModel.generateCodeInscription(req.body.email, req.body.name);
     promise.then(function(value){

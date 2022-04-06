@@ -68,7 +68,7 @@ db.user.insertMany([
         email:"liveur@gmail.com",
         password:"1234",
         type_user_id:ObjectId("6242ae04e73c895c2cfd915c"),
-        type_user_name:"liveur",
+        type_user_name:"livreur",
         contact:"0383256984"
     },
     {
@@ -76,7 +76,7 @@ db.user.insertMany([
         email:"responsable@gmail.com",
         password:"1234",
         type_user_id:ObjectId("624c704c23db7c2a19a95e90"),
-        type_user_name:"responsable ekaly",
+        type_user_name:"responsable",
         contact:"0383256984"
     }
 ]);

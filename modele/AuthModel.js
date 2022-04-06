@@ -26,6 +26,98 @@ module.exports = class AuthModel{
         });
     }
 
+    static loginForClient(db, email, password){
+        return new Promise((resolve, reject)=> {
+            db.collection("user").find(
+                {
+                    email : email,
+                    password : password,
+                    type_user_name : "client"
+                }
+            ).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
+    static loginForResto(db, email, password){
+        return new Promise((resolve, reject)=> {
+            db.collection("user").find(
+                {
+                    email : email,
+                    password : password,
+                    type_user_name : "restaurant"
+                }
+            ).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
+    static loginForResponsable(db, email, password){
+        return new Promise((resolve, reject)=> {
+            db.collection("user").find(
+                {
+                    email : email,
+                    password : password,
+                    type_user_name : "responsable"
+                }
+            ).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
+    static loginForLivreur(db, email, password){
+        return new Promise((resolve, reject)=> {
+            db.collection("user").find(
+                {
+                    email : email,
+                    password : password,
+                    type_user_name : "livreur"
+                }
+            ).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
     //generate code and send to mail
     static generateCodeInscription(email, name){
         return new Promise((resolve, reject)=> {
