@@ -198,30 +198,39 @@ module.exports = class CommadeModel{
     }
 
     //assigner un liveur  une commande
-    static asignLiveur(db, commande_id, livreur_id, livreur_name){
+    static asignLiveur(db, commande_array, livreur_id, livreur_name){
+        //console.log(commande_array);
         return new Promise((resolve, reject)=> {
-            db.collection("commande").findOneAndUpdate(
-                { _id: new ObjectId(commande_id) },
-                {
-                    $set: {
-                        livreur_id : livreur_id,
-                        livreur_name : livreur_name
+            let i = 0;
+            for(const commande of commande_array){
+                i++;
+                db.collection("commande").findOneAndUpdate(
+                    { _id: new ObjectId(commande._id) },
+                    {
+                        $set: {
+                            livreur_id : livreur_id,
+                            livreur_name : livreur_name
+                        }
+                    },
+                    {
+                        upsert: true
                     }
-                },
-                {
-                    upsert: true
-                }
-            ).then(function (data) {
-                if(data.ok == 1){
-                    resolve({
-                        "status": 200,
-                        "data": data.value
-                    });
-                }else{
-                    reject(data);
-                }
-                return;
-            });
+                ).then(function (data) {
+                    if(data.ok == 1){
+
+                        if(i == commande_array.length){
+                            resolve({
+                                "status": 200,
+                                "data": data.value
+                            });
+                        }
+
+                    }else{
+                        reject(data);
+                    }
+                    return;
+                });
+            }
         });
     }
     

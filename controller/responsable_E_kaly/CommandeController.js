@@ -56,11 +56,11 @@ router.get('/getCommandeByIdLivreur/:livreur_id/:limit/:page_num', (req, res) =>
 });
 
 //Asigner un livreaur
-router.put('/asignLivraison/:commande_id', (req, res) =>{
+router.post('/asignLivraison', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = CommandeModel.asignLiveur(db, req.params.commande_id, req.body.livreur_id, req.body.livreur_name);
+        const promise = CommandeModel.asignLiveur(db, req.body.commande_array, req.body.livreur_id, req.body.livreur_name);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
