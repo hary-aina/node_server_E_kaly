@@ -113,7 +113,7 @@ module.exports = class PlatModel{
                 { restaurant_id: resto_id, _id: new ObjectId(plat_id) },
                 {
                     $set: {
-                        etat: etat
+                        etat: parseInt(etat)
                     }
                 },
                 {
