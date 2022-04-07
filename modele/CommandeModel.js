@@ -54,6 +54,32 @@ module.exports = class CommadeModel{
         });
     }
 
+    //pour responsable ekaly
+    static getCommandePretaLiver(db, limit, page_num){
+        limit = parseInt(limit);
+        let skips = limit * (page_num - 1);
+        return new Promise((resolve, reject)=> {
+            db.collection("commande").find(
+                {
+                    livreur_id : "",
+                    etat : 20
+                }
+            )
+            .skip(skips).limit(limit).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(error);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
     //pour le livreur
     static getCommandeByIdLivreur(db, livreur_id, limit, page_num){
         limit = parseInt(limit);

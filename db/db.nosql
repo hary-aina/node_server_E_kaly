@@ -9,12 +9,12 @@ db.type_user.insertMany(
         description:"restaurateur qui travail avec E-kaly"
     },
     {
-        name:"liveur",
+        name:"livreur",
         description:"livreur de la marchandise",
     },
       {
         name:"responsable ekaly",
-        description:"livreur de la marchandise",
+        description:"gere les commandes et les livreurs",
     }
 );
 
