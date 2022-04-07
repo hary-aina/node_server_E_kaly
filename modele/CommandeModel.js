@@ -133,13 +133,14 @@ module.exports = class CommadeModel{
     }
 
     //modifier ma commande
-    static modifierCommande(db, commande_id, prix_global, detail_commande, lieu_adresse_livraison, client_contact){
+    static modifierCommande(db, commande_id, prix_global, revient_global, detail_commande, lieu_adresse_livraison, client_contact){
         return new Promise((resolve, reject)=> {
             db.collection("commande").findOneAndUpdate(
                 { _id: new ObjectId(commande_id) },
                 {
                     $set: {
-                        prix_global : prix_global, 
+                        prix_global : prix_global,
+                        revient_global : revient_global,
                         detail_commande : detail_commande, 
                         lieu_adresse_livraison : lieu_adresse_livraison, 
                         client_contact : client_contact
@@ -165,13 +166,14 @@ module.exports = class CommadeModel{
     }
 
     //faire une commande
-    static makeCommande(db, restaurant_id, restaurant_name, prix_global, client_id, client_name, client_contact , date_comande, lieu_adresse_livraison, detail_commande = []){
+    static makeCommande(db, restaurant_id, restaurant_name, prix_global, revient_global, client_id, client_name, client_contact , date_comande, lieu_adresse_livraison, detail_commande = []){
         return new Promise((resolve, reject)=> {
             db.collection("commande").insertOne(
                 {
                     restaurant_id: restaurant_id,
                     restaurant_name: restaurant_name,
                     prix_global: prix_global,
+                    revient_global: revient_global,
                     client_id: client_id,
                     client_name: client_name,
                     client_contact: client_contact,

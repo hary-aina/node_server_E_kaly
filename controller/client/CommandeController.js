@@ -16,7 +16,7 @@ router.post('/ajout', (req, res) =>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = CommandeModel.makeCommande(db, req.body.restaurant_id, req.body.restaurant_name, req.body.prix_global, req.body.client_id, req.body.client_name, req.body.client_contact , req.body.date_comande, req.body.lieu_adresse_livraison, req.body.detail_commande);
+        const promise = CommandeModel.makeCommande(db, req.body.restaurant_id, req.body.restaurant_name, req.body.prix_global, req.body.revient_global, req.body.client_id, req.body.client_name, req.body.client_contact , req.body.date_comande, req.body.lieu_adresse_livraison, req.body.detail_commande);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {
@@ -104,7 +104,7 @@ router.put('/modifier/:commande_id', (req, res)=>{
     let connection = new Connection();
 	let dbpromise = connection.getDB("ekaly");
     dbpromise.then(function(db){
-        const promise = CommandeModel.modifierCommande(db, req.params.commande_id, req.body.prix_global, req.body.detail_commande, req.body.lieu_adresse_livraison, req.body.client_contact);
+        const promise = CommandeModel.modifierCommande(db, req.params.commande_id, req.body.prix_global, req.body.revient_global, req.body.detail_commande, req.body.lieu_adresse_livraison, req.body.client_contact);
         promise.then(function(value){
             res.json(value);
         }).catch( error => {

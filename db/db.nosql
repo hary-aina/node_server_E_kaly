@@ -90,6 +90,7 @@ db.plat.insert(
         categorie_id:ObjectId(""),
         categorie_name:"entrée", 
         prix:"2000",
+        revient:"1000",
         description : "salade de tomate composé d'herbe et divers produit bio" 
         etat: 10
     }
@@ -103,6 +104,7 @@ db.commande.insert(
         restaurant_id: ObjectId("6242af76e73c895c2cfd915d"),
         restaurant_name:"BOZAKA",
         prix_global: "2000",
+        revient_global: "1000",
         client_id: ObjectId("6242b04ce73c895c2cfd915e"),
         client_name:"Jean de la croix",
         client_contact:"0326358945",
@@ -115,6 +117,7 @@ db.commande.insert(
                 plat_id: ObjectId("6242b302e73c895c2cfd9161"),
                 plat_name:"Salady voataby",
                 plat_prix: "2000",
+                plat_revient: "1000",
                 nombre: 2
             }
         ],
