@@ -37,7 +37,7 @@ AuthentificationRoutine.check = (req, res, next) => {
 		};
 		const onError = err => {
 			res.json({
-				code : 400,
+				status : 400,
 				error : true,
 				detailed : err,
 				data : 'Session invalide, manquante ou expirée'
