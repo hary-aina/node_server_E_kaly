@@ -8,10 +8,9 @@ AuthentificationRoutine.check = (req, res, next) => {
 
 	// url sans protection
 	// let exceptions = [
-	// 	'/login', '/inscription', '/logAdmin', 
-	// 	'/ville', '/interet', '/photo',
-	// 	'/generercode', '/confirmcode', '/verifemail',
-	// 	'/generercodeMDP', '/loginAndCode'
+	// 	'/login', '/inscription',
+	// 	'/generercode', '/client/plat/listePlat',
+	//  '/client/plat/voirPlat', '/client/plat/searchPlat'
 	// ];
 	// let filtre = exceptions.filter(url => req.url.startsWith(url));
 	// if ( filtre.length > 0 ) {
