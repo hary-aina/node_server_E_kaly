@@ -181,7 +181,7 @@ module.exports = class CommadeModel{
                     client_id: client_id,
                     client_name: client_name,
                     client_contact: client_contact,
-                    date_comande: date_comande,
+                    date_comande: new Date(date_comande),
                     lieu_adresse_livraison: lieu_adresse_livraison,
                     livreur_id: "",
                     livreur_name: "",
@@ -254,6 +254,40 @@ module.exports = class CommadeModel{
                     {
                         $group: {
                             _id : resto_id,
+                            chiffre_affaire : { $sum : "$prix_global"},
+                            cout : { $sum : "$revient_global" },
+                            benefice : { $sum : { $subtract : ["$prix_global", "$revient_global"]}}
+                        }
+                    }
+                ]
+            ).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+
+    static getBoardRestoByDay(db, resto_id){
+        return new Promise((resolve, reject)=> {
+            db.collection("commande").aggregate(
+                [
+                    { 
+                        $match : {
+                            restaurant_id : resto_id,
+                            etat : 30
+                        }
+                    },
+                    {
+                        $group: {
+                            _id : {day: { $dayOfMonth: "$date_comande"}, month: { $month : "$date_comande" }, year: { $year: "$date_comande" }},
                             chiffre_affaire : { $sum : "$prix_global"},
                             cout : { $sum : "$revient_global" },
                             benefice : { $sum : { $subtract : ["$prix_global", "$revient_global"]}}
