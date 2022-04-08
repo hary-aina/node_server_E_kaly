@@ -4,11 +4,11 @@ const router = express.Router();
 var PlatModel = require('../../modele/PlatModel');
 var Connection = require('../../db/Connection');
 
-const AuthentificationRoutine = require("../../tools/AuthentificationRoutine");
-router.use((req, res, next) => {
-	// on fait next si la session est bonne, on retourne une erreur sinon
-	AuthentificationRoutine.check(req, res, next);
-});
+// const AuthentificationRoutine = require("../../tools/AuthentificationRoutine");
+// router.use((req, res, next) => {
+// 	// on fait next si la session est bonne, on retourne une erreur sinon
+// 	AuthentificationRoutine.check(req, res, next);
+// });
 
 router.get('/', (req, get) => {
 	res.json({
