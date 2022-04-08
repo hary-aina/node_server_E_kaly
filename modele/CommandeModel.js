@@ -275,6 +275,7 @@ module.exports = class CommadeModel{
         });
     }
 
+    //get board by day by restaurant
     static getBoardRestoByDay(db, resto_id){
         return new Promise((resolve, reject)=> {
             db.collection("commande").aggregate(
@@ -288,6 +289,41 @@ module.exports = class CommadeModel{
                     {
                         $group: {
                             _id : {day: { $dayOfMonth: "$date_comande"}, month: { $month : "$date_comande" }, year: { $year: "$date_comande" }},
+                            chiffre_affaire : { $sum : "$prix_global"},
+                            cout : { $sum : "$revient_global" },
+                            benefice : { $sum : { $subtract : ["$prix_global", "$revient_global"]}}
+                        }
+                    }
+                ]
+            ).toArray(function (err, result) {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+					return;
+                } else {
+                    resolve({
+                        "status": 200,
+                        "data": result
+                    });
+                }
+            });
+        });
+    }
+    
+    //get board by ekaly
+    static getBoardEkaly(db){
+        return new Promise((resolve, reject)=> {
+            db.collection("commande").aggregate(
+                [
+                    { 
+                        $match : {
+                            etat : 30
+                        }
+                    },
+                    {
+                        $group: {
+                            _id : "$restaurant_id",
+                            restaurant_name : { $first : "$restaurant_name" },
                             chiffre_affaire : { $sum : "$prix_global"},
                             cout : { $sum : "$revient_global" },
                             benefice : { $sum : { $subtract : ["$prix_global", "$revient_global"]}}
