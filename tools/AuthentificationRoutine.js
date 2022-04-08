@@ -24,7 +24,10 @@ AuthentificationRoutine.check = (req, res, next) => {
 			token = req.query.token; // le token doit figurer sur l'url 
 		} else if ( req.method == 'POST' ) {
 			token = req.body.token; // le token doit figurer dans le corps de la reponse
-		} else if ( req.params['token'] != undefined) {
+		} else if ( req.method == 'PUT' ) {
+			token = req.body.token; // le token doit figurer dans le corps de la reponse
+		}
+		 else if ( req.params['token'] != undefined) {
 			token = req.params.token;
 		}
 		if ( token == '' || token == undefined || token == null ) {
