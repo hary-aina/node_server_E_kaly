@@ -156,6 +156,11 @@ module.exports = class AuthModel{
                         reject(data);
                     }
                     return;
+                }).catch(error =>{
+                    resolve({
+                        "status": 500,
+                        "data": error.data
+                    });
                 });
             }else{
                 resolve({
