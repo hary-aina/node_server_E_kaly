@@ -26,23 +26,6 @@ db.restaurant.insertOne(
     }
 );
 
-db.createCollection('categorie');
-db.categorie.insertMany([
-    {
-        name:"entrée"
-    },
-    {
-        name:"resitance"
-    },
-    {
-        name:"pizzas"
-    },
-    {
-        name:"tacos"
-    }
-]);
-
-
 db.createCollection('user');
 db.user.insertMany([    
     {
@@ -84,15 +67,54 @@ db.user.insertMany([
 db.createCollection('plat');
 db.plat.insert(
     {
-        name:"Salady voataby",
-        restaurant_id:ObjectId("6242af76e73c895c2cfd915d"),
+        name:"Salade de pate",
+        restaurant_id:"6242af76e73c895c2cfd915d",
         restaurant_name:"BOZAKA",
-        categorie_id:ObjectId(""),
         categorie_name:"entrée", 
-        prix:"2000",
-        revient:"1000",
-        description : "salade de tomate composé d'herbe et divers produit bio" 
+        prix:2000,
+        revient:1000,
+        description : "Ideal pour manger leger midi.", 
         etat: 10
+    },
+    {
+        name:"Mine sao",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"pate",
+        prix:10000,
+        revient:8000,
+        description : "Spécialité asiatique de pate, sesame et bien d'autre",
+        etat:10
+    },
+    {
+        name:"Nem au porc",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"entrée",
+        prix:5000,
+        revient:3000,
+        description : "Haché de viande de porc roulée dans une galette de riz frit",
+        etat:10
+    },
+    {
+        name:"Soupe thai",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"soupe",
+        prix:13000,
+        revient:10000,
+        description : "Soupe thai, pour gouter des saveurs thai",
+        etat:10
+    },
+    {
+        name:"Salade de mais mexiquaine",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"entrée",
+        prix:5000,
+        revient:4500,
+        description : "Salade epicée de mais",
+        etat:10
     }
 );
 
@@ -127,3 +149,47 @@ db.commande.insert(
 
  # -10:etat annuler  0:etat creer  10:etat valider  20:etat a liver  25:livraison en cours  30:etat liver 
 
+
+
+db.plat.insertMany([
+    {
+        name:"Mine sao",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"pate",
+        prix:10000,
+        revient:8000,
+        description : "Spécialité asiatique de pate, sesame et bien d'autre",
+        etat:10
+    },
+    {
+        name:"Nem au porc",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"entrée",
+        prix:5000,
+        revient:3000,
+        description : "Haché de viande de porc roulée dans une galette de riz frit",
+        etat:10
+    },
+    {
+        name:"Soupe thai",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"soupe",
+        prix:13000,
+        revient:10000,
+        description : "Soupe thai, pour gouter des saveurs thai",
+        etat:10
+    },
+    {
+        name:"Salade de mais mexiquaine",
+        restaurant_id:"6242af76e73c895c2cfd915d",
+        restaurant_name:"BOZAKA",
+        categorie_name:"entrée",
+        prix:5000,
+        revient:4500,
+        description : "Salade epicée de mais",
+        etat:10
+    }
+]);

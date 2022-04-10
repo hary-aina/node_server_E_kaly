@@ -293,6 +293,11 @@ module.exports = class CommadeModel{
                             cout : { $sum : "$revient_global" },
                             benefice : { $sum : { $subtract : ["$prix_global", "$revient_global"]}}
                         }
+                    },
+                    { 
+                        $sort : { 
+                            _id: 1
+                        } 
                     }
                 ]
             ).toArray(function (err, result) {
