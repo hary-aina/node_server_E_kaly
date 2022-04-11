@@ -21,8 +21,10 @@ module.exports = class LivreurModel{
                     let promise = new Promise((resolve, reject) =>{
                         let resultFinal = [];
                         let i = 0;
+
+                        console.log(result);
+
                         for(const livreur of result) {
-                            i++;
                             db.collection("commande").countDocuments(
                                 {
                                     livreur_id : livreur._id.toString(),
@@ -36,7 +38,7 @@ module.exports = class LivreurModel{
                                     nombre_commande : data
                                 }
                                 resultFinal.push(temp);
-
+                                i++;
                                 if(i == result.length){
                                     if(resultFinal.length != 0){
                                         resolve(resultFinal);

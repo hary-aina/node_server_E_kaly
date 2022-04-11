@@ -193,3 +193,77 @@ db.plat.insertMany([
         etat:10
     }
 ]);
+
+
+db.plat.insertMany([
+    {
+        name:"Salade de museau",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"salade",
+        prix:1000,
+        revient:500,
+        description : "Salade de levre de porc et de boeuf",
+        etat:10
+    },
+    {
+        name:"Brochettes de poulet (10 piece)",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"tsaky",
+        prix:2000,
+        revient:1900,
+        description : "dés de viande grillé au charbon",
+        etat:10
+    },
+    {
+        name:"Soupe chinoise",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"soupe",
+        prix:1500,
+        revient:1000,
+        description : "Nouille aux oeuf avec beaucoup de bouillon de poulet",
+        etat:10
+    },
+    {
+        name:"oignons vinaigrés",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"tsaky",
+        prix:100,
+        revient:60,
+        description : "Oignons marrinés dans du vinaigre standard et epice chinoise",
+        etat:10
+    },
+    {
+        name:"Composée spécial",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"entrée",
+        prix:1600,
+        revient:1200,
+        description : "Puré de patate, macaroni et salade de charcuterie",
+        etat:10
+    },
+    {
+        name:"Thé au gingembre et poivre",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"boisson",
+        prix:1000,
+        revient:200,
+        description : "De l'eau boullante infusé de gingembre, cannelle, poivre",
+        etat:10
+    },
+    {
+        name:"Tsaramaso sauce",
+        restaurant_id:"6251a0d8b8748ee1e4812745",
+        restaurant_name:"MAHAZATRA RESTAURANT",
+        categorie_name:"resistance",
+        prix:5000,
+        revient:4500,
+        description : "Grand de haricot sans viande de 500g avec du riz, sauce tomate et poivre vert",
+        etat:10
+    }
+]);
