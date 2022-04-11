@@ -22,7 +22,7 @@ module.exports = class LivreurModel{
                         let resultFinal = [];
                         let i = 0;
 
-                        console.log(result);
+                        //console.log(result);
 
                         for(const livreur of result) {
                             db.collection("commande").countDocuments(
